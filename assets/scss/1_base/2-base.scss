@@ -5,6 +5,7 @@ $red: #eb8d70;
 $red-hover: #f7c6b7;
 $white: #fff;
 $gray: #efefef;
+$strongGray: #7e7e7e;
 
 body {
   background: #fdfdfd;
@@ -19,5 +20,18 @@ body {
 }
 
 section {
-  margin-top: 50px;
+  margin-top: 40px;
+
+  @media all and (min-width: 600px) {
+    margin-top: 70px;
+
+    &::first-child {
+      margin-top: 50px;
+    }
+  }
+}
+
+.content-center {
+  width: 100%;
+  text-align: center;
 }

@@ -1,5 +1,10 @@
 nav {
   margin-top: 30px;
+  display: none;
+
+  @media all and (min-width: 600px) {
+    display: block;
+  }
   ul {
     @include flex(row, center, flex-start, wrap);
 
@@ -7,6 +12,8 @@ nav {
       a {
         padding: 5px 10px;
         text-decoration: none;
+        transition: color 0.3s ease;
+        will-change: color;
 
         &.active,
         &:hover {

@@ -3,7 +3,11 @@ $font-secondary: "Montserrat", sans-serif;
 
 body {
   font-family: $font-primary;
-  font-size: 16px;
+  font-size: 14px;
+
+  @media all and (min-width: 600px) {
+    font-size: 16px;
+  }
 }
 
 h1,
@@ -21,4 +25,8 @@ h1 {
 
 h2 {
   font-size: 2em;
+}
+
+h3 {
+  font-size: 1.2em;
 }

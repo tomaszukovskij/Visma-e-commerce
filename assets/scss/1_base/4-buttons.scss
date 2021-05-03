@@ -7,6 +7,8 @@
   cursor: pointer;
   border-radius: 2px;
   background: $gray;
+  transition: bacground 0.3s ease;
+  will-change: bacground;
 
   &--primary {
     background: $green;
@@ -14,6 +16,12 @@
 
     &:hover {
       background: $green-hover;
+    }
+  }
+
+  @media all and (max-width: 599px) {
+    &--xs-full {
+      width: 100%;
     }
   }
 }
