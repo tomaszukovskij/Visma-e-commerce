@@ -1,1 +1,13 @@
-@import '1_base/1-reset'
+// Base
+@import "1_base/0-reset";
+@import "1_base/1-mixins";
+@import "1_base/2-base";
+@import "1_base/3-typography";
+@import "1_base/4-buttons";
+
+// Layout
+@import "2-layout/1-header";
+@import "2-layout/2-navigation";
+
+// Components
+@import "3-components/1-carousel";

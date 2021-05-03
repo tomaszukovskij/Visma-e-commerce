@@ -1,0 +1,19 @@
+.btn {
+  display: inline-block;
+  border: 0;
+  outline: 0;
+  box-shadow: none;
+  padding: 5px 10px;
+  cursor: pointer;
+  border-radius: 2px;
+  background: $gray;
+
+  &--primary {
+    background: $green;
+    color: $white;
+
+    &:hover {
+      background: $green-hover;
+    }
+  }
+}

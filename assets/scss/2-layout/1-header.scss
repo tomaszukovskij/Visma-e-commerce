@@ -1,0 +1,29 @@
+header {
+  padding: 20px 0px;
+}
+
+.header__top {
+  @include flex(row, center, space-between, wrap);
+}
+
+.header__logo {
+  a {
+    text-decoration: none;
+    font-family: $font-secondary;
+    font-weight: 700;
+    padding: 10px 10px 10px 0;
+    font-size: 1.5em;
+  }
+}
+
+.header__controls {
+  @include flex(row, center, flex-start, wrap);
+
+  .btn {
+    margin-right: 10px;
+
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+}
