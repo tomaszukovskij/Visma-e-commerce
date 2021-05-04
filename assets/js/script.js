@@ -55,20 +55,18 @@ function moveCarousel() {
   setButtonAttr();
 }
 
-// Move carousel forward
-function moveForward() {
-  carouselIemsActiveIndex++;
-  carouselIemsActiveIndex > carouselItemsLength - 1
-    ? (carouselIemsActiveIndex = carouselItemsLength - 1)
-    : "";
-  isResizing = false;
-  moveCarousel();
-}
+// Move carousel to direction
+function moveTo(direction) {
+  if (direction === "forward") {
+    carouselIemsActiveIndex++;
+    carouselIemsActiveIndex > carouselItemsLength - 1
+      ? (carouselIemsActiveIndex = carouselItemsLength - 1)
+      : "";
+  } else if (direction === "back") {
+    carouselIemsActiveIndex--;
+    carouselIemsActiveIndex < 0 ? (carouselIemsActiveIndex = 0) : "";
+  }
 
-// Move carousel back
-function moveBack() {
-  carouselIemsActiveIndex--;
-  carouselIemsActiveIndex < 0 ? (carouselIemsActiveIndex = 0) : "";
   isResizing = false;
   moveCarousel();
 }
@@ -93,8 +91,8 @@ function changeSize() {
 
 // Run on load
 function init() {
-  btnNext.addEventListener("click", moveForward);
-  btnPrev.addEventListener("click", moveBack);
+  btnNext.addEventListener("click", () => moveTo("forward"));
+  btnPrev.addEventListener("click", () => moveTo("back"));
   moveCarousel();
   moveCarouselOnPagination();
   window.onresize = changeSize;
