@@ -1,8 +1,8 @@
 $color-primary: #151515;
 $green: #92c064;
-$green-hover: #a9cc88;
+$green-hover: lighten($green, 10%);
 $red: #eb8d70;
-$red-hover: #f7c6b7;
+$red-hover: lighten($red, 10%);
 $white: #fff;
 $gray: #efefef;
 $strongGray: #7e7e7e;
@@ -22,10 +22,10 @@ body {
 section {
   margin-top: 40px;
 
-  @media all and (min-width: 600px) {
+  @include breakpoint(sm) {
     margin-top: 70px;
 
-    &::first-child {
+    &:first-child {
       margin-top: 50px;
     }
   }

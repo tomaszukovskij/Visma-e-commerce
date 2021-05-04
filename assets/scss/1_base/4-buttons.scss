@@ -7,21 +7,21 @@
   cursor: pointer;
   border-radius: 2px;
   background: $gray;
-  transition: bacground 0.3s ease;
-  will-change: bacground;
+  transition: background 0.3s ease;
+}
 
-  &--primary {
-    background: $green;
-    color: $white;
+.btn--primary {
+  background: $green;
+  color: $white;
 
-    &:hover {
-      background: $green-hover;
-    }
+  &:hover,
+  &:focus {
+    background: $green-hover;
   }
+}
 
-  @media all and (max-width: 599px) {
-    &--xs-full {
-      width: 100%;
-    }
+@include breakpoint(xs) {
+  .btn--xs-full {
+    width: 100%;
   }
 }

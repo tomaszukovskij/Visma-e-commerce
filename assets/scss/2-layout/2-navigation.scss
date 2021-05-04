@@ -2,7 +2,7 @@ nav {
   margin-top: 30px;
   display: none;
 
-  @media all and (min-width: 600px) {
+  @include breakpoint(sm) {
     display: block;
   }
   ul {
@@ -13,10 +13,10 @@ nav {
         padding: 5px 10px;
         text-decoration: none;
         transition: color 0.3s ease;
-        will-change: color;
 
         &.active,
-        &:hover {
+        &:hover,
+        &:focus {
           color: $green;
         }
       }
