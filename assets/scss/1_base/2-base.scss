@@ -1,0 +1,37 @@
+$color-primary: #151515;
+$green: #92c064;
+$green-hover: lighten($green, 10%);
+$red: #eb8d70;
+$red-hover: lighten($red, 10%);
+$white: #fff;
+$gray: #efefef;
+$strongGray: #7e7e7e;
+
+body {
+  background: #fdfdfd;
+  color: $color-primary;
+}
+
+.container {
+  max-width: 1160px;
+  width: 100%;
+  padding: 0 20px;
+  margin: 0 auto;
+}
+
+section {
+  margin-top: 40px;
+
+  @include breakpoint(sm) {
+    margin-top: 70px;
+
+    &:first-child {
+      margin-top: 50px;
+    }
+  }
+}
+
+.content-center {
+  width: 100%;
+  text-align: center;
+}

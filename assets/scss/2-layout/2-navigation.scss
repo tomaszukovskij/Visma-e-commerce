@@ -1,0 +1,31 @@
+nav {
+  margin-top: 30px;
+  display: none;
+
+  @include breakpoint(sm) {
+    display: block;
+  }
+  ul {
+    @include flex(row, center, flex-start, wrap);
+
+    li {
+      a {
+        padding: 5px 10px;
+        text-decoration: none;
+        transition: color 0.3s ease;
+
+        &.active,
+        &:hover,
+        &:focus {
+          color: $green;
+        }
+      }
+
+      &:first-child {
+        a {
+          padding-left: 0;
+        }
+      }
+    }
+  }
+}

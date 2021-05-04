@@ -1,0 +1,84 @@
+.carousel-list {
+  @include flex(row, flex-start, flex-start, wrap);
+}
+
+.carousel-list__item {
+  flex: 1 auto;
+  position: relative;
+  height: 230px;
+
+  @include breakpoint(sm) {
+    height: 440px;
+  }
+
+  &::before {
+    content: "";
+    width: 100%;
+    height: 100%;
+    background: #000;
+    opacity: 0.2;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+}
+
+.carousel-list__image {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+}
+
+.carousel-list__info {
+  color: $white;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 1;
+  text-align: center;
+
+  span {
+    font-size: 2.4em;
+    font-family: $font-secondary;
+    letter-spacing: 1px;
+  }
+}
+
+.carousel__pagination {
+  @include flex(row, center, center, wrap);
+  margin-top: 20px;
+}
+
+.pagination-bullet {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: $gray;
+  margin: 0 5px;
+  cursor: pointer;
+
+  &:hover:not(.pagination-bullet--active) {
+    background: $green-hover;
+  }
+}
+
+.pagination-bullet--active {
+  background: $green;
+}
+
+@include breakpoint(xs) {
+  #carousel {
+    margin-top: 20px;
+  }
+}

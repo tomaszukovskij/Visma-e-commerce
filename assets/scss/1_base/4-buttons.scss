@@ -1,0 +1,27 @@
+.btn {
+  display: inline-block;
+  border: 0;
+  outline: 0;
+  box-shadow: none;
+  padding: 5px 10px;
+  cursor: pointer;
+  border-radius: 2px;
+  background: $gray;
+  transition: background 0.3s ease;
+}
+
+.btn--primary {
+  background: $green;
+  color: $white;
+
+  &:hover,
+  &:focus {
+    background: $green-hover;
+  }
+}
+
+@include breakpoint(xs) {
+  .btn--xs-full {
+    width: 100%;
+  }
+}

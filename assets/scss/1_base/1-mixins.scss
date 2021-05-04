@@ -1,0 +1,19 @@
+@mixin flex($row, $align, $justify, $wrap) {
+  display: flex;
+  flex-direction: $row;
+  align-items: $align;
+  justify-content: $justify;
+  flex-wrap: $wrap;
+}
+
+@mixin breakpoint($point) {
+  @if $point == sm {
+    @media all and (min-width: 600px) {
+      @content;
+    }
+  } @else if $point == xs {
+    @media all and (max-width: 599px) {
+      @content;
+    }
+  }
+}
