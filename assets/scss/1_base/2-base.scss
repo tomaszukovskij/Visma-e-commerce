@@ -7,9 +7,18 @@ $white: #fff;
 $gray: #efefef;
 $strongGray: #7e7e7e;
 
+$cubic: cubic-bezier(0.215, 0.61, 0.355, 1);
+
 body {
   background: #fdfdfd;
   color: $color-primary;
+}
+
+main {
+  padding-top: 66px;
+  @include breakpoint(sm) {
+    padding-top: 112px;
+  }
 }
 
 .container {

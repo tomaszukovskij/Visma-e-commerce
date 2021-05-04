@@ -1,11 +1,19 @@
+.carousel-wrap {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
 .carousel-list {
-  @include flex(row, flex-start, flex-start, wrap);
+  @include flex(row, flex-start, flex-start, nowrap);
 }
 
 .carousel-list__item {
-  flex: 1 auto;
+  width: 100%;
   position: relative;
   height: 230px;
+  flex-shrink: 0;
+  text-decoration: none;
 
   @include breakpoint(sm) {
     height: 440px;
@@ -16,10 +24,11 @@
     width: 100%;
     height: 100%;
     background: #000;
-    opacity: 0.2;
+    opacity: 0.4;
     position: absolute;
     top: 0;
     left: 0;
+    z-index: 1;
   }
 }
 
@@ -45,19 +54,81 @@
   align-items: center;
   justify-content: center;
   position: relative;
-  z-index: 1;
+  z-index: 2;
   text-align: center;
 
   span {
     font-size: 2.4em;
     font-family: $font-secondary;
     letter-spacing: 1px;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: transform 0.2s $cubic, opacity 0.2s $cubic;
+
+    .carousel-list__item--active & {
+      opacity: 1;
+      transform: translateY(0px);
+      transition: transform 0.5s $cubic 200ms, opacity 0.5s $cubic 200ms;
+    }
   }
 }
 
 .carousel__pagination {
+  @include flex(row, center, flex-start, wrap);
+}
+
+.carousel__navigation {
+  @include flex(row, center, space-between, wrap);
+  margin-top: 10px;
+
+  @include breakpoint(sm) {
+    margin-top: 20px;
+  }
+}
+
+.carousel__buttons {
   @include flex(row, center, center, wrap);
-  margin-top: 20px;
+  .btn {
+    background: none;
+    width: 50px;
+    height: 50px;
+    position: relative;
+    @include flex(row, center, center, wrap);
+
+    &::before {
+      content: "";
+      position: absolute;
+      width: 15px;
+      height: 15px;
+      border: 0;
+      border-right: 2px solid $color-primary;
+      border-bottom: 2px solid $color-primary;
+      transition: border 0.3s ease;
+    }
+
+    &:disabled {
+      &::before {
+        border-color: $gray;
+      }
+    }
+
+    &.carousel-next {
+      &::before {
+        transform: rotate(-45deg);
+      }
+    }
+    &.carousel-prev {
+      &::before {
+        transform: rotate(135deg);
+      }
+    }
+
+    &:hover:not([disabled]) {
+      &::before {
+        border-color: $green;
+      }
+    }
+  }
 }
 
 .pagination-bullet {
@@ -67,6 +138,7 @@
   background: $gray;
   margin: 0 5px;
   cursor: pointer;
+  transition: background 0.3s ease;
 
   &:hover:not(.pagination-bullet--active) {
     background: $green-hover;
