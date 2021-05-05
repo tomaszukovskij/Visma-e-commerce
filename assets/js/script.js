@@ -7,20 +7,20 @@ const carouselList = document.querySelector(".carousel-list"),
 
 let carouselWrapWidth = carouselWrap.offsetWidth,
   carouselItemsLength = carouselItems.length,
-  carouselIemsActiveIndex = 0,
+  carouselItemsActiveIndex = 0,
   isResizing = false;
 
 // Add or disable switch transition
 function addTransition() {
-  !isResizing
-    ? (carouselList.style.transition = "transform 0.5s ease-in-out")
-    : (carouselList.style.transition = "");
+  carouselList.style.transition = isResizing
+    ? ""
+    : "transform 0.5s ease-in-out";
 }
 
 // Set active class to carousel item
 function addActiveToItem() {
   carouselItems.forEach((item, index) => {
-    index === carouselIemsActiveIndex
+    index === carouselItemsActiveIndex
       ? item.classList.add("carousel-list__item--active")
       : item.classList.remove("carousel-list__item--active");
   });
@@ -28,7 +28,7 @@ function addActiveToItem() {
 // Add/remove class to pagination bullet
 function setActivePagination() {
   pagination.forEach((item, index) => {
-    index === carouselIemsActiveIndex
+    index === carouselItemsActiveIndex
       ? item.classList.add("pagination-bullet--active")
       : item.classList.remove("pagination-bullet--active");
   });
@@ -38,7 +38,7 @@ function setActivePagination() {
 function moveCarouselOnPagination() {
   pagination.forEach((item, index) => {
     item.addEventListener("click", () => {
-      carouselIemsActiveIndex = index;
+      carouselItemsActiveIndex = index;
       moveCarousel();
     });
   });
@@ -46,7 +46,7 @@ function moveCarouselOnPagination() {
 
 // Move carousel to selected item
 function moveCarousel() {
-  let transformValue = carouselIemsActiveIndex * carouselWrapWidth;
+  let transformValue = carouselItemsActiveIndex * carouselWrapWidth;
   carouselList.style.transform =
     "translate3d(-" + transformValue + "px, 0px, 0px)";
   addActiveToItem();
@@ -57,14 +57,13 @@ function moveCarousel() {
 
 // Move carousel to direction
 function moveTo(direction) {
-  if (direction === "forward") {
-    carouselIemsActiveIndex++;
-    carouselIemsActiveIndex > carouselItemsLength - 1
-      ? (carouselIemsActiveIndex = carouselItemsLength - 1)
-      : "";
-  } else if (direction === "back") {
-    carouselIemsActiveIndex--;
-    carouselIemsActiveIndex < 0 ? (carouselIemsActiveIndex = 0) : "";
+  const isFirst = carouselItemsActiveIndex === 0;
+  const isLast = carouselItemsActiveIndex === carouselItemsLength - 1;
+
+  if (direction === "forward" && !isLast) {
+    carouselItemsActiveIndex += 1;
+  } else if (direction === "back" && !isFirst) {
+    carouselItemsActiveIndex -= 1;
   }
 
   isResizing = false;
@@ -73,12 +72,8 @@ function moveTo(direction) {
 
 // Set disabled if carousel is on firt or last element
 function setButtonAttr() {
-  carouselIemsActiveIndex === 0
-    ? (btnPrev.disabled = true)
-    : (btnPrev.disabled = false);
-  carouselIemsActiveIndex === carouselItemsLength - 1
-    ? (btnNext.disabled = true)
-    : (btnNext.disabled = false);
+  btnPrev.disabled = carouselItemsActiveIndex === 0;
+  btnNext.disabled = carouselItemsActiveIndex === carouselItemsLength - 1;
 }
 
 // On window resize change carouselWrapWidth to atjust transform

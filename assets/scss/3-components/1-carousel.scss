@@ -65,7 +65,7 @@
     transform: translateY(20px);
     transition: transform 0.2s $cubic, opacity 0.2s $cubic;
 
-    .carousel-list__item--active & {
+    @at-root .carousel-list__item--active & {
       opacity: 1;
       transform: translateY(0px);
       transition: transform 0.5s $cubic 200ms, opacity 0.5s $cubic 200ms;
