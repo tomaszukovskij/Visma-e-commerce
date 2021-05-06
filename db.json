@@ -1,0 +1,25 @@
+{
+  "products": [
+    {
+      "id": 1,
+      "title": "Product title",
+      "text": "Space for a small product description",
+      "price": "36.99",
+      "imageUrl": "https://placeimg.com/500/360/tech"
+    },
+    {
+      "id": 2,
+      "title": "Product title",
+      "text": "Space for a small product description",
+      "price": "36.99",
+      "imageUrl": "https://placeimg.com/500/360/tech?v2"
+    },
+    {
+      "id": 3,
+      "title": "Product title",
+      "text": "Space for a small product description",
+      "price": "36.99",
+      "imageUrl": "https://placeimg.com/500/360/tech?v3"
+    }
+  ]
+}
