@@ -1,9 +1,38 @@
 // Import fetch
 const http = new Http();
+import { CarouselClass } from "./carouselClass.js";
 
-http.get("products").then(render);
+http.get("products").then((data) => {
+  populateCarousel(data);
+  populateProducts(data);
+});
 
-function render(data) {
+function populateCarousel(data) {
+  const carouselList = document.querySelector(".carousel-list");
+  const carouselContainer = document.querySelector("#carousel");
+  data.forEach((item, index) => {
+    console.log(index);
+    const elementClass = index === 0 ? 'carousel-list__item carousel-list__item--active' : 'carousel-list__item';
+    if (item.isHighlighted) {
+      let newItem = `
+      <a href="" class="${elementClass}">
+        <figure class="carousel-list__image">
+          <img src="${item.imageUrl}" alt="Title">
+        </figure>
+        <div class="carousel-list__info">
+          <span>${item.title}</span>
+        </div>
+      </a>
+      `;
+      carouselList.innerHTML += newItem;
+    }
+  });
+
+  const carouselSlider = new CarouselClass(carouselContainer);
+  carouselSlider.init();
+}
+
+function populateProducts(data) {
   const productSection = document.querySelector("#products");
   let productList = document.querySelector(".products-list");
 
