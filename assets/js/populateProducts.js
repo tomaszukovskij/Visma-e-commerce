@@ -11,7 +11,6 @@ function populateCarousel(data) {
   const carouselList = document.querySelector(".carousel-list");
   const carouselContainer = document.querySelector("#carousel");
   data.forEach((item, index) => {
-    console.log(index);
     const elementClass = index === 0 ? 'carousel-list__item carousel-list__item--active' : 'carousel-list__item';
     if (item.isHighlighted) {
       let newItem = `
