@@ -1,0 +1,20 @@
+#product-control {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 10;
+}
+
+.product-control__icon {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: $green;
+  @include flex(row, center, center, warap);
+  cursor: pointer;
+
+  &:before {
+    content: "+";
+    color: $white;
+  }
+}

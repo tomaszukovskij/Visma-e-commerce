@@ -1,96 +1,107 @@
-const carouselList = document.querySelector(".carousel-list"),
-  carouselItems = document.querySelectorAll(".carousel-list__item"),
-  carouselWrap = document.querySelector(".carousel-wrap"),
-  btnNext = document.querySelector(".carousel-next"),
-  btnPrev = document.querySelector(".carousel-prev"),
-  pagination = document.querySelectorAll(".pagination-bullet");
+import { UI } from "./ui.js";
+const http = new Http();
 
-let carouselWrapWidth = carouselWrap.offsetWidth,
-  carouselItemsLength = carouselItems.length,
-  carouselItemsActiveIndex = 0,
-  isResizing = false;
+const fetchDataFromApi = {
+  getData() {
+    return http.get("products").then((data) => data);
+  },
+};
 
-// Add or disable switch transition
-function addTransition() {
-  carouselList.style.transition = isResizing
-    ? ""
-    : "transform 0.5s ease-in-out";
-}
-
-// Set active class to carousel item
-function addActiveToItem() {
-  carouselItems.forEach((item, index) => {
-    index === carouselItemsActiveIndex
-      ? item.classList.add("carousel-list__item--active")
-      : item.classList.remove("carousel-list__item--active");
-  });
-}
-// Add/remove class to pagination bullet
-function setActivePagination() {
-  pagination.forEach((item, index) => {
-    index === carouselItemsActiveIndex
-      ? item.classList.add("pagination-bullet--active")
-      : item.classList.remove("pagination-bullet--active");
+// Fetch and populate product data
+function fetchProductDataHandler() {
+  fetchDataFromApi.getData().then((data) => {
+    UI.populateCarousel(data);
+    UI.populateProducts(data);
   });
 }
 
-// Navigate carousel on pagination click
-function moveCarouselOnPagination() {
-  pagination.forEach((item, index) => {
-    item.addEventListener("click", () => {
-      carouselItemsActiveIndex = index;
-      moveCarousel();
-    });
+// Variable for selected item ID to delete
+let itemIdToDelete = "";
+const onDelete = (event) => deleteProductHandle(event, itemIdToDelete);
+
+UI.btnAddProduct.addEventListener("click", addNewProductHandler);
+UI.btnSubmitProduct.addEventListener("click", submitProductHandler);
+UI.productList.addEventListener("click", editOrDeleteProductModalHandler);
+UI.modalContainer.addEventListener("click", closeModalHandler);
+
+function addNewProductHandler() {
+  UI.showModal(true, "form");
+  UI.setButtonState("add");
+}
+
+function closeModalHandler(e) {
+  if (e.target.classList.contains("js-cancel")) {
+    UI.showModal(false, "form");
+    UI.clearFields();
+    UI.btnDeleteProduct.removeEventListener("click", onDelete);
+    UI.showErrorMsg(false);
+  }
+}
+
+// show modal and get selected product data
+function editOrDeleteProductModalHandler(e) {
+  if (e.target.classList.contains("js-edit-product")) {
+    fetchSingleProductData(parseInt(e.target.value), "edit");
+    UI.showModal(true, "form");
+    e.preventDefault();
+  } else if (e.target.classList.contains("js-delete-product")) {
+    fetchSingleProductData(parseInt(e.target.value), "delete");
+    UI.showModal(true, "delete");
+    e.preventDefault();
+  }
+}
+
+// Get only single product which one needs to be edited or deleted
+function fetchSingleProductData(id, type) {
+  fetchDataFromApi.getData().then((data) => {
+    const foundItem = data.find((item) => item.id === id);
+    if (type === "edit") {
+      UI.fillFormWithDataToEdit(foundItem);
+    } else if (type === "delete") {
+      itemIdToDelete = foundItem.id;
+      UI.btnDeleteProduct.addEventListener("click", onDelete);
+    }
   });
 }
 
-// Move carousel to selected item
-function moveCarousel() {
-  let transformValue = carouselItemsActiveIndex * carouselWrapWidth;
-  carouselList.style.transform =
-    "translate3d(-" + transformValue + "px, 0px, 0px)";
-  addActiveToItem();
-  addTransition();
-  setActivePagination();
-  setButtonAttr();
-}
+// Submit new or edited item
+function submitProductHandler(e) {
+  // get input values
+  const dataValues = UI.getValues(),
+    isValid = UI.checkInputValidation();
 
-// Move carousel to direction
-function moveTo(direction) {
-  const isFirst = carouselItemsActiveIndex === 0;
-  const isLast = carouselItemsActiveIndex === carouselItemsLength - 1;
-
-  if (direction === "forward" && !isLast) {
-    carouselItemsActiveIndex += 1;
-  } else if (direction === "back" && !isFirst) {
-    carouselItemsActiveIndex -= 1;
+  if (isValid) {
+    UI.showErrorMsg(false);
+    if (!e.target.classList.contains("submit-edit")) {
+      http
+        .post("products", dataValues)
+        .then((data) => data)
+        .catch((err) => console.log(err));
+      fetchProductDataHandler();
+      UI.clearFields();
+      UI.showModal(false, "form");
+    } else {
+      http
+        .put("products/" + dataValues.id, dataValues)
+        .then((data) => data)
+        .catch((err) => console.log(err));
+      fetchProductDataHandler();
+      UI.showModal(false, "form");
+      UI.clearFields();
+    }
+  } else {
+    UI.showErrorMsg(true);
   }
 
-  isResizing = false;
-  moveCarousel();
+  e.preventDefault();
 }
 
-// Set disabled if carousel is on firt or last element
-function setButtonAttr() {
-  btnPrev.disabled = carouselItemsActiveIndex === 0;
-  btnNext.disabled = carouselItemsActiveIndex === carouselItemsLength - 1;
+function deleteProductHandle(e, id) {
+  http.delete("products/" + id).then((data) => data);
+  fetchProductDataHandler();
+  UI.showModal(false, "delete");
+
+  e.preventDefault();
 }
 
-// On window resize change carouselWrapWidth to atjust transform
-function changeSize() {
-  carouselWrapWidth = carouselWrap.offsetWidth;
-  isResizing = true;
-  carouselList.style.transition = "";
-  moveCarousel();
-}
-
-// Run on load
-function init() {
-  btnNext.addEventListener("click", () => moveTo("forward"));
-  btnPrev.addEventListener("click", () => moveTo("back"));
-  moveCarousel();
-  moveCarouselOnPagination();
-  window.onresize = changeSize;
-}
-
-init();
+fetchProductDataHandler();

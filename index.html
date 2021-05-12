@@ -39,45 +39,10 @@
       <section id="carousel">
         <div class="container">
           <div class="carousel-wrap">
-            <div class="carousel-list">
-              <a href="" class="carousel-list__item">
-                <figure class="carousel-list__image">
-                  <img src="https://placeimg.com/1000/400/arch" alt="Title" />
-                </figure>
-                <div class="carousel-list__info">
-                  <span>Worldwide shipping</span>
-                </div>
-              </a>
-              <a href="" class="carousel-list__item">
-                <figure class="carousel-list__image">
-                  <img
-                    src="https://placeimg.com/1000/400/arch?v2"
-                    alt="Title"
-                  />
-                </figure>
-                <div class="carousel-list__info">
-                  <span>Door to door <br />delivery</span>
-                </div>
-              </a>
-              <a href="" class="carousel-list__item">
-                <figure class="carousel-list__image">
-                  <img
-                    src="https://placeimg.com/1000/400/arch?v3"
-                    alt="Title"
-                  />
-                </figure>
-                <div class="carousel-list__info">
-                  <span>Money back guarantee </span>
-                </div>
-              </a>
-            </div>
+            <div class="carousel-list"></div>
           </div>
           <div class="carousel__navigation">
-            <div class="carousel__pagination">
-              <span class="pagination-bullet pagination-bullet--active"></span>
-              <span class="pagination-bullet"></span>
-              <span class="pagination-bullet"></span>
-            </div>
+            <div class="carousel__pagination"></div>
             <div class="carousel__buttons">
               <button type="button" class="btn carousel-prev"></button>
               <button type="button" class="btn carousel-next"></button>
@@ -88,68 +53,66 @@
       <section id="products">
         <div class="container">
           <h2 class="content-center">Featured</h2>
-          <div class="products-list">
-            <a href="" class="products-list__item">
-              <figure class="products-list__image">
-                <img src="https://placeimg.com/500/360/tech" alt="Title" />
-              </figure>
-              <h3>Product title</h3>
-              <p>Space for a small product description</p>
-              <div class="products-list__controls">
-                <span class="products-list__price">36.99 USD</span>
-                <button type="button" class="btn btn--primary btn--xs-full">
-                  Buy now
-                </button>
-              </div>
-            </a>
-            <a href="" class="products-list__item">
-              <figure class="products-list__image">
-                <img src="https://placeimg.com/500/360/tech" alt="Title" />
-              </figure>
-              <h3>Product title</h3>
-              <p>Space for a small product description</p>
-              <div class="products-list__controls">
-                <span class="products-list__price">36.99 USD</span>
-                <button type="button" class="btn btn--primary btn--xs-full">
-                  Buy now
-                </button>
-              </div>
-            </a>
-            <a href="" class="products-list__item">
-              <figure class="products-list__image">
-                <img src="https://placeimg.com/500/360/tech" alt="Title" />
-              </figure>
-              <h3>Product title</h3>
-              <p>Space for a small product description</p>
-              <div class="products-list__controls">
-                <span class="products-list__price">36.99 USD</span>
-                <button type="button" class="btn btn--primary btn--xs-full">
-                  Buy now
-                </button>
-              </div>
-            </a>
-            <a href="" class="products-list__item">
-              <figure class="products-list__image">
-                <img src="https://placeimg.com/500/360/tech" alt="Title" />
-              </figure>
-              <h3>Product title</h3>
-              <p>Space for a small product description</p>
-              <div class="products-list__controls">
-                <span class="products-list__price">36.99 USD</span>
-                <button type="button" class="btn btn--primary btn--xs-full">
-                  Buy now
-                </button>
-              </div>
-            </a>
-          </div>
+          <div class="products-list"></div>
         </div>
       </section>
     </main>
+    <div id="product-control">
+      <div class="product-control__icon" id="add-product"></div>
+    </div>
+    <div id="modal">
+      <div class="modal-container">
+        <form action="submit" class="modal__form">
+          <div class="form-group">
+            <label for="title">Title</label>
+            <input type="text" name="title" id="title" />
+          </div>
+          <div class="form-group">
+            <label for="title">Price</label>
+            <input type="number" name="price" id="price" step=".01" />
+          </div>
+          <div class="form-group">
+            <label for="image-url">Image url</label>
+            <input type="text" name="image-url" id="image-url" />
+          </div>
+          <div class="form-group">
+            <label for="text">Text</label>
+            <textarea name="text" id="text"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="text">Is highlighted?</label>
+            <input type="checkbox" id="isHighlighted" />
+          </div>
+          <div class="form-group">
+            <button type="submit" id="submit-product" class="btn btn--primary">
+              Add product
+            </button>
+            <button type="button" class="btn js-cancel">Cancel</button>
+          </div>
+          <input type="hidden" name="hidden-id" id="hidden-id" />
+        </form>
+        <div class="modal__delete">
+          <p>Are you sure want to delete?</p>
+          <div>
+            <button
+              type="submit"
+              id="delete-product"
+              class="btn btn--secondary"
+            >
+              Delete
+            </button>
+            <button type="button" class="btn js-cancel">Cancel</button>
+          </div>
+        </div>
+      </div>
+    </div>
     <footer>
       <div class="container">
         <p>© Copyright 2021</p>
       </div>
     </footer>
-    <script src="assets/js/script.js"></script>
+    <script src="assets/js/http.js"></script>
+    <script type="module" src="assets/js/ui.js"></script>
+    <script type="module" src="assets/js/script.js"></script>
   </body>
 </html>
