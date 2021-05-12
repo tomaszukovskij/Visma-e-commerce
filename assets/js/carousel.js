@@ -1,21 +1,21 @@
-export class CarouselClass {
+export class Carousel {
   constructor(container) {
     // Created variables
     this.container = container;
-    this.carouselList = this.container.querySelector(".carousel-list"),
-    this.carouselItems = this.container.querySelectorAll(".carousel-list__item"),
-    this.carouselWrap = this.container.querySelector(".carousel-wrap"),
-    this.btnNext = this.container.querySelector(".carousel-next"),
-    this.btnPrev = this.container.querySelector(".carousel-prev"),
-    this.pagination = this.container.querySelectorAll(".pagination-bullet");
+    (this.carouselList = this.container.querySelector(".carousel-list")),
+      (this.carouselItems = this.container.querySelectorAll(
+        ".carousel-list__item"
+      )),
+      (this.carouselWrap = this.container.querySelector(".carousel-wrap")),
+      (this.btnNext = this.container.querySelector(".carousel-next")),
+      (this.btnPrev = this.container.querySelector(".carousel-prev")),
+      (this.pagination = this.container.querySelectorAll(".pagination-bullet"));
 
     // Calculated variables
-    this.carouselWrapWidth = this.carouselWrap.offsetWidth,
-    this.carouselItemsLength = this.carouselItems.length,
-    this.carouselItemsActiveIndex = 0,
-    this.isResizing = false;
-
-
+    (this.carouselWrapWidth = this.carouselWrap.offsetWidth),
+      (this.carouselItemsLength = this.carouselItems.length),
+      (this.carouselItemsActiveIndex = 0),
+      (this.isResizing = false);
   }
 
   // Add or disable switch transition
@@ -23,16 +23,16 @@ export class CarouselClass {
     return (this.carouselList.style.transition = this.isResizing
       ? ""
       : "transform 0.5s ease-in-out");
-  };
+  }
 
   // Set active class to carousel item
   addActiveToItem() {
     this.carouselItems.forEach((item, index) => {
-      return index ===  this.carouselItemsActiveIndex
+      return index === this.carouselItemsActiveIndex
         ? item.classList.add("carousel-list__item--active")
         : item.classList.remove("carousel-list__item--active");
     });
-  };
+  }
 
   // Add/remove class to pagination bullet
   setActivePagination() {
@@ -41,7 +41,7 @@ export class CarouselClass {
         ? item.classList.add("pagination-bullet--active")
         : item.classList.remove("pagination-bullet--active");
     });
-  };
+  }
 
   // Navigate carousel on pagination click
   moveCarouselOnPagination() {
@@ -51,7 +51,7 @@ export class CarouselClass {
         this.moveCarousel();
       });
     });
-  };
+  }
 
   // On window resize change carouselWrapWidth to atjust transform
   changeSize() {
@@ -59,7 +59,7 @@ export class CarouselClass {
     this.isResizing = true;
     this.carouselList.style.transition = "";
     this.moveCarousel();
-  };
+  }
 
   // Move carousel to selected item
   moveCarousel() {
@@ -70,12 +70,13 @@ export class CarouselClass {
     this.addTransition();
     this.setActivePagination();
     this.setButtonAttr();
-  };
+  }
 
   // Move carousel to direction
   moveTo(direction) {
     const isFirst = this.carouselItemsActiveIndex === 0;
-    const isLast = this.carouselItemsActiveIndex === this.carouselItemsLength - 1;
+    const isLast =
+      this.carouselItemsActiveIndex === this.carouselItemsLength - 1;
 
     if (direction === "forward" && !isLast) {
       this.carouselItemsActiveIndex += 1;
@@ -85,21 +86,22 @@ export class CarouselClass {
 
     this.isResizing = false;
     this.moveCarousel();
-  };
+  }
 
   // Set disabled if carousel is on firt or last element
   setButtonAttr() {
     this.btnPrev.disabled = this.carouselItemsActiveIndex === 0;
-    this.btnNext.disabled = this.carouselItemsActiveIndex === this.carouselItemsLength - 1;
-  };
+    this.btnNext.disabled =
+      this.carouselItemsActiveIndex === this.carouselItemsLength - 1;
+  }
 
   // Run on load
   init() {
     this.btnNext.addEventListener("click", () => this.moveTo("forward"));
     this.btnPrev.addEventListener("click", () => this.moveTo("back"));
 
-    window.addEventListener('resize', () => this.changeSize());
+    window.addEventListener("resize", () => this.changeSize());
 
     this.moveCarouselOnPagination();
-  };
+  }
 }

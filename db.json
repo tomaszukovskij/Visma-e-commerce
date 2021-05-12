@@ -9,37 +9,36 @@
       "isHighlighted": true
     },
     {
-      "id": 2,
-      "title": "Product title 2",
-      "text": "Space for a small product description",
-      "price": "36.99",
-      "imageUrl": "https://placeimg.com/500/360/tech?v2",
-      "isHighlighted": true
-    },
-    {
       "id": 3,
-      "title": "Product title 3 ",
-      "text": "Space for a small product description",
-      "price": "36.99",
+      "title": "title",
+      "price": "122",
       "imageUrl": "https://placeimg.com/500/360/tech?v3",
+      "text": "Space for a small product description",
       "isHighlighted": false
     },
     {
       "id": 4,
-      "title": "Product title 4",
-      "text": "Space for a small product description",
+      "title": "Title",
       "price": "36.99",
       "imageUrl": "https://placeimg.com/500/360/tech?v4",
+      "text": "Space for a small product description",
       "isHighlighted": false
     },
     {
       "id": 5,
-      "title": "Product title 5",
-      "text": "Space for a small product description",
-      "price": "36.99",
-      "imageUrl": "https://placeimg.com/500/360/tech?v5",
+      "title": "Naujas",
+      "price": "20",
+      "imageUrl": "https://placeimg.com/500/360/tech?v9",
+      "text": "Sveiki",
       "isHighlighted": true
+    },
+    {
+      "id": 6,
+      "title": "Six titleeeeee",
+      "price": "12",
+      "imageUrl": "https://placeimg.com/500/360/tech?v6",
+      "text": "1221",
+      "isHighlighted": false
     }
-    
   ]
 }
